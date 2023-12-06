@@ -7,7 +7,7 @@ function Footer() {
     <div className="p-16 px-[7.5rem] pb-2">
       <div className="grid grid-cols-[500px_repeat(3,1fr)] gap-6 font-medium text-sm text-gray-700">
         <div className="flex flex-col gap-4">
-          <h1>LOGO</h1>
+          <h1 className="text-lg font-semibold text-blue-950">QuizCraft</h1>
           <p className=" leading-7">
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Reiciendis
             labore voluptatum dignissimos debitis odio vel perspiciatis

@@ -4,26 +4,39 @@ export const ResultReducer = createSlice({
   name: "result",
   initialState: {
     userId: null,
-    result: [],
+    score: 0,
+    optionsSelected: [],
   },
   reducers: {
     setUserId: (state, action) => {
       state.userId = action.payload
     },
-    pushResultAction: (state, action) => {
-      state.result.push(action.payload)
-    },
+
     updateResultAction: (state, action) => {
-      const { trace, checked } = action.payload
-      state.result.fill(checked, trace, trace + 1)
+      const { trace, selectedOption } = action.payload
+      state.optionsSelected[trace] = selectedOption
+    },
+    addScore: (state, action) => {
+      state.score += action.payload
     },
     resetResult: (state, action) => {
       state.userId = null
-      state.result.length = 0
+      state.score = 0
+      state.optionsSelected.length = 0
+    },
+    updateLength: (state, action) => {
+      state.optionsSelected.length = action.payload
+      state.optionsSelected.fill(undefined)
     },
   },
 })
 
 export default ResultReducer.reducer
-export const { setUserId, pushResultAction, updateResultAction, resetResult } =
-  ResultReducer.actions
+export const {
+  setUserId,
+  pushResultAction,
+  updateResultAction,
+  addScore,
+  resetResult,
+  updateLength,
+} = ResultReducer.actions

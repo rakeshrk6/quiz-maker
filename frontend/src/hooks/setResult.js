@@ -1,24 +1,20 @@
 import { postServerData } from "../components/helper/helper"
-import {
-  pushResultAction,
-  updateResultAction,
-} from "../redux/slices/ResultReducer"
 
-export const PushAnswer = (result) => async (dispatch) => {
-  try {
-    await dispatch(pushResultAction(result))
-  } catch (error) {
-    console.log(error)
-  }
-}
+// export const PushAnswer = (result) => (dispatch) => {
+//   try {
+//     dispatch(pushResultAction(result))
+//   } catch (error) {
+//     console.log(error)
+//   }
+// }
 
-export const updateResult = (index) => async (dispatch) => {
-  try {
-    dispatch(updateResultAction(index))
-  } catch (error) {
-    console.log(error)
-  }
-}
+// export const updateResult = (index) => async (dispatch) => {
+//   try {
+//     dispatch(updateResultAction(index))
+//   } catch (error) {
+//     console.log(error)
+//   }
+// }
 
 // insert user result
 export const usePublishResult = (resultData) => {

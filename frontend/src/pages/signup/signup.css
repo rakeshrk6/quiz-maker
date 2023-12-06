@@ -12,8 +12,8 @@
 .Signup .signup-box {
     padding: 40px;
     min-width: 400px;
-    border: 1px solid black;
-    border-radius: 4px;
+    /* border: 1px solid black; */
+    /* border-radius: 4px; */
 }
 
 .Signup label,
@@ -24,10 +24,12 @@
 }
 
 .Signup label {
-    font-weight: bold;
+    font-weight: 500;
+    color: whitesmoke;
 }
 
 .Signup input {
+    color: whitesmoke;
     padding: 8px 16px;
     border-radius: 4px;
     border: 1px solid black;
@@ -35,9 +37,9 @@
 
 .Signup .submit {
     background-color: #29b4ff;
-    color: white;
+    color: whitesmoke;
     border: none;
-    margin-top: 16px;
+    margin-top: 26px;
     font-weight: bold;
 }
 

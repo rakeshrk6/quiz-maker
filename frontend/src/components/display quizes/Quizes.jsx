@@ -9,7 +9,7 @@ function Quizes() {
   const quiz = useSelector((state) => state.quiz)
   const open = useSelector((state) => state.instruction.open)
   const [getData, fetchQuiz] = useFetchAllQuizs()
-  const [fetched, setFetched] = useState(false)
+
   const dispatch = useDispatch()
 
   useEffect(() => {

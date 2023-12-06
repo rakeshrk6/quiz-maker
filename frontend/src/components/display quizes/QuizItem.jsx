@@ -34,14 +34,12 @@ function QuizItem({ items }) {
       </div>
 
       <div className="py-5 pb-8">
-        {/* <Link to="/instructions"> */}
         <button
           onClick={handleClick}
           className=" outline outline-1 py-[0.6rem] px-7 rounded-md font-[500] text-[14px] hover:bg-gray-100"
         >
           Take Quiz
         </button>
-        {/* </Link> */}
       </div>
     </div>
   )

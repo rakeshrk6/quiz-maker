@@ -1,16 +1,14 @@
 import React, { useRef } from "react"
-import { useDispatch } from "react-redux"
-import { Link, useNavigate } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux"
+import { useNavigate } from "react-router-dom"
 import { setUserId } from "../redux/slices/ResultReducer"
 // import * as React from "react"
 import Box from "@mui/material/Box"
-import Button from "@mui/material/Button"
+
 import Typography from "@mui/material/Typography"
 import Modal from "@mui/material/Modal"
-import QuizItem from "./display quizes/QuizItem"
+
 import { setOpen } from "../redux/slices/ShowInstruction"
-import TextField from "@mui/material/TextField"
-import { Input } from "@mui/material"
 
 const style = {
   position: "absolute",
@@ -29,6 +27,10 @@ function QuizInstructions() {
   const inputRef = useRef()
   const dispatch = useDispatch()
   const navigate = useNavigate()
+
+  const {
+    result: { optionsSelected, userId, score },
+  } = useSelector((state) => state.rootreducer)
 
   function startQuiz() {
     if (inputRef.current?.value) {

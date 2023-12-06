@@ -54,12 +54,12 @@ function Navbar() {
   //   }
   // }, [])
 
-  // window.addEventListener("scroll", function () {
-  //   const header = this.document.querySelector(".fixed")
-  //   if (this.scrollY >= 80) {
-  //     header.classList.add("shadow-md")
-  //   } else header.classList.remove("shadow-md")
-  // })
+  window.addEventListener("scroll", function () {
+    const header = this.document.querySelector(".fixed")
+    if (this.scrollY >= 80) {
+      header.classList.add("shadow-md")
+    } else header.classList.remove("shadow-md")
+  })
 
   return (
     <div
@@ -69,9 +69,9 @@ function Navbar() {
     >
       {shouldShowNavigation && (
         <nav className="flex items-center justify-between max-w-6xl h-[70px] mx-auto  ">
-          <div>
+          <div className="text-xl font-semibold text-blue-950">
             <NavLink to="/">
-              <h1>LOGO</h1>
+              <h1>QuizCraft</h1>
             </NavLink>
           </div>
 

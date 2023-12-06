@@ -7,7 +7,6 @@ import {
   getItem,
   setItem,
 } from "../../utils/localStorageManager"
-import Navbar from "../../components/header/Navbar"
 
 function Login() {
   const [email, setEmail] = useState("")
@@ -30,14 +29,14 @@ function Login() {
   }
 
   return (
-    <div className="Login mt-[10px]">
-      <div className="login-box">
-        <h2 className="heading">Login</h2>
+    <div className="Login mt-[10px] bg-gradient-to-r from-indigo-500 to-green-200 h-screen">
+      <div className="rounded-lg login-box bg-black bg-opacity-60">
+        <h2 className="heading text-white text-xl font-medium mb-10">Login</h2>
         <form onSubmit={handleSubmit}>
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email ">Email</label>
           <input
             type="email"
-            className="email"
+            className="email bg-black bg-opacity-50"
             id="email"
             onChange={(e) => setEmail(e.target.value)}
           />
@@ -45,14 +44,14 @@ function Login() {
           <label htmlFor="password">Password</label>
           <input
             type="password"
-            className="password"
+            className="password bg-black bg-opacity-50"
             id="password"
             onChange={(e) => setPassword(e.target.value)}
           />
 
-          <input type="submit" className="submit" />
+          <input type="submit" className="submit cursor-pointer" />
         </form>
-        <p className="subheading">
+        <p className="subheading text-gray-400">
           Do not have an account? <Link to="/signup">Sign Up</Link>
         </p>
       </div>

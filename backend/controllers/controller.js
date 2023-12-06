@@ -17,10 +17,10 @@ async function getQuizs(req, res) {
 // post all questions
 async function insertQuiz(req, res) {
   try {
-    const { id, name, questions, answers, time_limit } = req.body
-    await Quizs.insertMany({ id, name, questions, answers, time_limit })
+    const { _id, name, questions, answers } = req.body
 
-    res.json("data saved successfully")
+    await Quizs.insertMany({ _id, name, questions, answers })
+    console.log("data saved successfully")
   } catch (error) {
     res.json({ error })
   }

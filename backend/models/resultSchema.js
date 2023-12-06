@@ -3,11 +3,13 @@ const { Schema } = mongoose
 
 // result model
 const resultModel = new Schema({
+  _id: mongoose.Schema.Types.ObjectId,
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+  quizId: { type: mongoose.Schema.Types.ObjectId, ref: "Question" },
   username: { type: String },
-  result: { type: Array, default: [] },
-  attempts: { type: Number, default: 0 },
-  points: { type: Number, default: 0 },
-  percentage: { type: Number, default: 0 },
+  optionSelected: { type: Array, default: [] },
+  score: { type: Number, default: 0 },
+  accuracy: { type: Number, default: 0 },
   createdAt: { type: Date, default: Date.now },
 })
 

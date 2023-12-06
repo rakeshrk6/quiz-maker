@@ -8,8 +8,6 @@ const connect = require("./database/connection")
 const authRouter = require("./router/authRouter")
 const cookieParser = require("cookie-parser")
 const requireUser = require("./middlewares/requireUser")
-//import connection file
-// const connect = require("./database/connection")
 
 const app = express()
 const PORT = process.env.PORT

@@ -1,17 +1,16 @@
 import { useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import axios from "axios"
+import { axiosClient } from "../../utils/axiosClient"
 
-export function countAttempts(result) {
-  return result.filter((r) => r !== undefined).length
+export function countAttempts(optionsSelected) {
+  return optionsSelected.filter((r) => r !== undefined).length
 }
 
-export function countPoints(result, answers, point) {
-  return result
-    .map((element, i) => answers[i] === element)
-    .filter((i) => i)
-    .map((i) => point)
-    .reduce((prev, curr) => prev + curr, 0)
+export function countCorrect(optionsSelected, answers) {
+  return optionsSelected.reduce((count, element, i) => {
+    return count + (answers[i] === element ? 1 : 0)
+  }, 0)
 }
 
 // check user auth
@@ -29,7 +28,6 @@ export async function getServerData(url, callback) {
 
 // post server data
 export async function postServerData(url, result, callback) {
-  const data = await (await axios.post(url, result))?.data
-  // const data = await axiosClient.post("/auth/refresh")
+  const data = await axiosClient.post("/api/quiz", result)
   return callback ? callback(data) : data
 }

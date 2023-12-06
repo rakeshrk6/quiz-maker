@@ -5,7 +5,7 @@ const { error, success } = require("../utils/responseWrapper")
 
 const signupController = async (req, res) => {
   try {
-    const { email, password } = req.body
+    const { _id, email, password } = req.body
 
     if (!email || !password) {
       // return res.status(400).send("All fields are required")
@@ -19,7 +19,8 @@ const signupController = async (req, res) => {
 
     //we stored the password as hash. To convert to hash we use library bcrypt
     const hashedPassword = await bcrypt.hash(password, 10)
-    const user = await User.create({
+    const user = await User.insertMany({
+      _id,
       email,
       password: hashedPassword,
     })

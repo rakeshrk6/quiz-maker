@@ -5,7 +5,7 @@ import "../signup/signup.css"
 import Navbar from "../../components/header/Navbar"
 
 function Signup() {
-  const [name, setName] = useState("")
+  const [username, setUsername] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const navigate = useNavigate()
@@ -14,7 +14,7 @@ function Signup() {
     e.preventDefault()
     try {
       const result = await axiosClient.post("/auth/signup", {
-        name,
+        username,
         email,
         password,
       })
@@ -25,22 +25,22 @@ function Signup() {
   }
 
   return (
-    <div className="Signup mt-[20px]">
-      <div className="signup-box">
-        <h2 className="heading">Signup</h2>
+    <div className="Signup mt-[20px] bg-gradient-to-r from-indigo-500 to-green-200 h-screen">
+      <div className="signup-box rounded-lg bg-black bg-opacity-60">
+        <h2 className="heading text-white text-xl font-medium mb-10">Signup</h2>
         <form onSubmit={handleSubmit}>
-          <label htmlFor="name">Name</label>
+          <label htmlFor="username">Username</label>
           <input
             type="text"
-            className="name"
-            id="name"
-            onChange={(e) => setName(e.target.value)}
+            className="name bg-black bg-opacity-50"
+            id="username"
+            onChange={(e) => setUsername(e.target.value)}
           />
 
           <label htmlFor="email">Email</label>
           <input
             type="email"
-            className="email"
+            className="email bg-black bg-opacity-50"
             id="email"
             onChange={(e) => setEmail(e.target.value)}
           />
@@ -48,14 +48,14 @@ function Signup() {
           <label htmlFor="password">Password</label>
           <input
             type="password"
-            className="password"
+            className="password bg-black bg-opacity-50"
             id="password"
             onChange={(e) => setPassword(e.target.value)}
           />
 
-          <input type="submit" className="submit" />
+          <input type="submit" className="submit cursor-pointer" />
         </form>
-        <p className="subheading">
+        <p className="subheading text-gray-400">
           Already have an account? <Link to="/login">Log In</Link>
         </p>
       </div>
