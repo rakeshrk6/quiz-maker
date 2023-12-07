@@ -17,7 +17,7 @@ app.use(morgan("tiny"))
 app.use(
   cors({
     credentials: true,
-    origin: "http://localhost:3000",
+    origin: "https://quiz-maker-kappa.vercel.app/",
   })
 )
 app.use(express.json())
