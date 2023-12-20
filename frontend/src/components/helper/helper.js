@@ -13,12 +13,6 @@ export function countCorrect(optionsSelected, answers) {
   }, 0)
 }
 
-// check user auth
-export function CheckUserExist({ children }) {
-  const navigate = useNavigate()
-  const auth = useSelector((state) => state.rootreducer.result.userId)
-  return auth ? children : navigate("/instructions")
-}
 
 // get server data
 export async function getServerData(url, callback) {

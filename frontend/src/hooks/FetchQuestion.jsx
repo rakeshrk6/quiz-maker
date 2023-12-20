@@ -9,7 +9,7 @@ export const useFetchQuestion = (id) => {
   const fetchQuestionData = async (id) => {
     try {
       const response = await axiosClient.get(`/api/questions/${id}`)
-      console.log("response", response)
+      // console.log("response", response)
       const { questions, answers } = response.data
 
       if (questions.length > 0) {

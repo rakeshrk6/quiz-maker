@@ -1,20 +1,5 @@
 import { postServerData } from "../components/helper/helper"
-
-// export const PushAnswer = (result) => (dispatch) => {
-//   try {
-//     dispatch(pushResultAction(result))
-//   } catch (error) {
-//     console.log(error)
-//   }
-// }
-
-// export const updateResult = (index) => async (dispatch) => {
-//   try {
-//     dispatch(updateResultAction(index))
-//   } catch (error) {
-//     console.log(error)
-//   }
-// }
+import { axiosClient } from "../utils/axiosClient"
 
 // insert user result
 export const usePublishResult = (resultData) => {
@@ -33,15 +18,10 @@ export const usePublishResult = (resultData) => {
   })()
 }
 //insert quiz questions
-export const usePublishQuiz = (quiz) => {
-  // const { name, time_limit, question } = quiz
+export const PublishQuiz = (quiz) => {
   ;(async () => {
     try {
-      await postServerData(
-        `${process.env.REACT_APP_SERVER_HOSTNAME}/api/quiz`,
-        quiz,
-        (data) => data
-      )
+      await axiosClient.post("/api/quiz", quiz)
     } catch (error) {
       console.log(error)
     }

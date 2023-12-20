@@ -3,18 +3,35 @@ import TextField from "@mui/material/TextField"
 import { Checkbox, FormControlLabel } from "@mui/material"
 import { useDispatch, useSelector } from "react-redux"
 import { addQuestion } from "../../redux/slices/QuestionSlice"
+import toast from "react-hot-toast"
 
 function AddQuestion() {
-  const question = useRef(null)
-  const option1 = useRef(null)
-  const option2 = useRef(null)
-  const option3 = useRef(null)
-  const option4 = useRef(null)
+  const question = useRef("")
+  const option1 = useRef("")
+  const option2 = useRef("")
+  const option3 = useRef("")
+  const option4 = useRef("")
   const dispatch = useDispatch()
-  const [answer, setAnswer] = useState(null)
+  const [answer, setAnswer] = useState("")
 
-  const handleSubmit = (event) => {
+  function handleSubmit(event) {
     event.preventDefault()
+
+    if (
+      question.current.value === "" ||
+      option1.current.value === "" ||
+      option2.current.value === "" ||
+      answer === ""
+    ) {
+      toast.error("Please provide all details", {
+        style: {
+          padding: "10px",
+          background: "#333",
+          color: "#fff",
+        },
+      })
+      return
+    }
     const formData = {
       questions: {
         question: question.current.value,
@@ -27,6 +44,7 @@ function AddQuestion() {
       },
       answers: answer,
     }
+
     dispatch(addQuestion(formData))
     question.current.value = ""
     option1.current.value = ""

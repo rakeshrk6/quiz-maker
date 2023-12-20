@@ -15,12 +15,10 @@ export const useFetchAllQuizs = () => {
     setGetData((prev) => ({ ...prev, isLoading: true }))
 
     try {
-      // const quizes = await axiosClient.get("/get-quizes/")
       const quizes = await getServerData(
         `${process.env.REACT_APP_SERVER_HOSTNAME}/get-quizes/`,
         (data) => data
       )
-      console.log("quizes:", quizes)
 
       if (quizes.length > 0) {
         setGetData((prev) => ({ ...prev, isLoading: false }))
