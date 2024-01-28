@@ -9,17 +9,22 @@ export const useFetchQuestion = (id) => {
   const fetchQuestionData = async (id) => {
     try {
       const response = await axiosClient.get(`/api/questions/${id}`)
-      // console.log("response", response)
+      console.log("response", response)
       const { questions, answers } = response.data
 
-      if (questions.length > 0) {
+      if (questions && answers && questions.length > 0) {
         dispatch(startExamAction({ questions, answers }))
         dispatch(updateLength(questions.length))
       } else {
         throw new Error("No Question Available")
       }
     } catch (error) {
-      console.log(error)
+      console.log("error:", error)
+      if (error && error.response) {
+        console.log("Error response:", error.response)
+      } else {
+        console.log("No error response available")
+      }
     }
   }
 

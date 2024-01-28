@@ -6,6 +6,7 @@ import Footer from "../components/footer/Footer"
 import { resetResult } from "../redux/slices/ResultReducer"
 import { useDispatch } from "react-redux"
 import { reset } from "../redux/slices/QuestionReducer"
+import Openai from "../components/chatgpt/Openai"
 
 function Home() {
   const dispatch = useDispatch()
@@ -16,6 +17,7 @@ function Home() {
   return (
     <div id="home">
       <HeroSection />
+      <Openai />
       <Quizes />
       <GetStarted />
       <Footer />

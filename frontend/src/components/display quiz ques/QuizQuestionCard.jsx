@@ -23,33 +23,37 @@ function QuizQuestionCard() {
   const questions = queue[trace]
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  let timeOutId
 
   useEffect(() => {
     if (trace < queue.length) {
-      const intervalId = setTimeout(() => {
-        console.log(trace)
-        console.log(optionsSelected)
+      const timeOutId = setTimeout(() => {
+        // console.log(trace)
+        // console.log(optionsSelected)
+
         moveNext()
-      }, 3000)
+      }, 10000)
 
       return () => {
-        clearInterval(intervalId)
+        clearTimeout(timeOutId)
       }
     }
+
     if (trace >= queue.length) {
       navigate("/result")
     }
   }, [trace, queue.length, navigate])
 
-  async function moveNext() {
+  function moveNext() {
     setShowFeedback(true)
 
     setTimeout(() => {
       setChecked(undefined)
       dispatch(moveNextAction())
+
       setShowFeedback(false)
       setFeedback("Wrong")
-    }, 2000)
+    }, 5000)
   }
 
   async function onSelect(i) {
@@ -61,7 +65,11 @@ function QuizQuestionCard() {
       dispatch(addScore(100))
       setFeedback("Correct")
     }
-    // moveNext()
+
+    // setTimeout(() => {
+    //   // clearInterval(timeOutId)
+    //   moveNext()
+    // }, 1000)
   }
 
   return (

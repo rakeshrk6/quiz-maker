@@ -9,7 +9,6 @@ import { axiosClient } from "../../utils/axiosClient"
 
 function Navbar() {
   const accessToken = getItem(KEY_ACCESS_TOKEN)
-  const [scrolled, setScrolled] = useState(false)
   const [isLogged, setLogged] = useState(false)
   const navigate = useNavigate()
 
@@ -39,21 +38,6 @@ function Navbar() {
   // Conditionally render navigation links based on the current route
   const shouldShowNavigation = showOnRoutes.includes(location.pathname)
 
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     if (window.scrollY > 100) {
-  //       setScrolled(true)
-  //     } else {
-  //       setScrolled(false)
-  //     }
-  //   }
-
-  //   window.addEventListener("scroll", handleScroll)
-  //   return () => {
-  //     window.removeEventListener("scroll", handleScroll)
-  //   }
-  // }, [])
-
   window.addEventListener("scroll", function () {
     const header = this.document.querySelector(".fixed")
     if (this.scrollY >= 80) {
@@ -63,8 +47,7 @@ function Navbar() {
 
   return (
     <div
-      className={`bg-white fixed z-[200] top-0 w-full ${
-        scrolled ? "shadow-md" : ""
+      className={`bg-white fixed z-[200] top-0 w-full 
       }`}
     >
       {shouldShowNavigation && (
@@ -77,15 +60,21 @@ function Navbar() {
 
           <div className="flex -mr-20">
             <NavLink to="/">
-              <p className="mx-4">Home</p>
+              <p
+                className={`mx-4 ${
+                  location.pathname === "/" ? "text-blue-950 font-semibold" : ""
+                }`}
+              >
+                Home
+              </p>
             </NavLink>
-            <NavLink to="/about-us">
+            <NavLink to="/">
               <p className="mx-4">About Us</p>
             </NavLink>
             <NavLink to="/products">
               <p className="mx-4">Products</p>
             </NavLink>
-            <NavLink to="/contact">
+            <NavLink to="/">
               <p className="mx-4">Contact Us</p>
             </NavLink>
           </div>
@@ -100,7 +89,7 @@ function Navbar() {
             {!isLogged ? (
               <>
                 <NavLink to="/login">
-                  <button className="mx-2 bg-green-600 rounded-lg p-2 text-white px-5">
+                  <button className="mx-2 bg-green-600 hover:bg-green-700 rounded-lg p-2 text-white px-5">
                     Sign In
                   </button>
                 </NavLink>
@@ -108,7 +97,7 @@ function Navbar() {
             ) : (
               <button
                 onClick={setLogOut}
-                className="mx-2 bg-green-600 rounded-lg p-2 text-white px-5"
+                className="mx-2 bg-green-600 hover:bg-green-700 rounded-lg p-2 text-white px-5"
               >
                 Log Out
               </button>

@@ -21,7 +21,7 @@ function HeroSection() {
         </div>
       </div>
 
-      <div className="flex flex-col items-center  py-16 bg-slate-100">
+      {/* <div className="flex flex-col items-center  py-16 bg-slate-100">
         <div className="text-3xl font-bold mb-9 text-gray-800">
           Make your own quiz with our{" "}
           <span className="text-sky-600">online quiz maker</span>
@@ -33,7 +33,7 @@ function HeroSection() {
           a homework assignment for Math class, or an ice breaker to welcome new
           faces, there’s something here for everyone.
         </div>
-      </div>
+      </div> */}
     </div>
   )
 }

@@ -13,9 +13,11 @@ export const axiosClient = axios.create({
 
 axiosClient.interceptors.request.use((request) => {
   const accessToken = getItem(KEY_ACCESS_TOKEN)
-  console.log("accessToken", accessToken)
+  // console.log("accessToken", accessToken)
 
-  request.headers["Authorization"] = `Bearer ${accessToken}`
+  const headers = { ...request.headers }
+  headers["Authorization"] = `Bearer ${accessToken}`
+
   console.log("request", request)
   return request
 })

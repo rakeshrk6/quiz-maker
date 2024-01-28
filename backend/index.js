@@ -8,6 +8,7 @@ const connect = require("./database/connection")
 const authRouter = require("./router/authRouter")
 const cookieParser = require("cookie-parser")
 const requireUser = require("./middlewares/requireUser")
+const bodyParser = require("body-parser")
 
 const app = express()
 const PORT = process.env.PORT
@@ -17,17 +18,19 @@ app.use(morgan("tiny"))
 app.use(
   cors({
     credentials: true,
-    origin: "https://quiz-maker-frontend.vercel.app",
+    origin: "http://localhost:3000",
   })
 )
+app.use(bodyParser.json())
 app.use(express.json())
 app.use(cookieParser())
 
-connect()
 //routes
 app.use("/api", requireUser, router) //apis
 app.use("/get-quizes", router)
 app.use("/auth", authRouter)
+// chatgpt api
+app.use("/chatgpt", router)
 
 app.get("/", (req, res) => {
   try {
