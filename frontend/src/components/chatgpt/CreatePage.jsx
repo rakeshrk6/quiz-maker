@@ -18,7 +18,7 @@ const style = {
   py: 2,
 }
 
-function CreatePage({ close }) {
+function CreatePage({ Open, close }) {
   const [level, setLevel] = useState("")
   const [isLoading, setLoading] = useState(false)
   const [isGotOutput, setGotOutput] = useState(false)
@@ -43,7 +43,7 @@ function CreatePage({ close }) {
     ;(async () => {
       try {
         const output = await axios.post(
-          "http://localhost:8000/chatgpt/ai",
+          `${process.env.REACT_APP_SERVER_HOSTNAME}/chatgpt/ai`,
           inputData
         )
         const { quiz_name, questions, answers } = output.data
@@ -69,11 +69,12 @@ function CreatePage({ close }) {
     navigate("/quiz")
   }
   return (
-    <div className="flex justify-center items-center bg-white z-50">
+    <div className={`flex justify-center items-center bg-white z-50`}>
       <Modal
         open={true}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
+        className={` ${Open ? "backdrop-blur" : ""} `}
       >
         <Box className="flex justify-center rounded-lg px-10" sx={style}>
           <div

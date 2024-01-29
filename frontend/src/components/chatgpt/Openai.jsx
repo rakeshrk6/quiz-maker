@@ -30,7 +30,7 @@ function Openai() {
           Take Quiz by GPT
         </button>
       </div>
-      {isOpen && <CreatePage close={toggleComponent} />}
+      {isOpen && <CreatePage Open={isOpen} close={toggleComponent} />}
     </div>
   )
 }

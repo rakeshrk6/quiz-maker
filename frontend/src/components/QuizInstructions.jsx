@@ -27,6 +27,7 @@ function QuizInstructions() {
   const inputRef = useRef()
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const { open } = useSelector((state) => state.instruction)
 
   const {
     result: { optionsSelected, userId, score },
@@ -46,6 +47,7 @@ function QuizInstructions() {
         open={true}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
+        className={` ${open ? "backdrop-blur" : ""} `}
       >
         <Box className="rounded-lg px-20" sx={style}>
           <div
