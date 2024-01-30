@@ -53,7 +53,7 @@ axiosClient.interceptors.response.use(async (response) => {
       } else {
         removeItem(KEY_ACCESS_TOKEN)
 
-        window.location.replace("/login", "_self")
+        // window.location.replace("/login", "_self")
         console.log("no refresh token")
         return Promise.reject(error)
       }
