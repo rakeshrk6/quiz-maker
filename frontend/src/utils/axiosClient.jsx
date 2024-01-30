@@ -36,12 +36,13 @@ axiosClient.interceptors.response.use(async (response) => {
   if (statusCode === 401 && !originalRequest._retry) {
     originalRequest._retry = true
     try {
-      const res = await axios
+      const res = await axiosClient
         .create({ withCredentials: true })
-        .get(`${process.env.REACT_APP_SERVER_HOSTNAME}/auth/refresh`)
+        .get(`/auth/refresh`)
       console.log("response from backend", res)
       if (res.data.status === "ok") {
         const newAccessToken = res.data.result.accessToken
+
         setItem(KEY_ACCESS_TOKEN, newAccessToken)
 
         // Update the request's headers with the new access token
@@ -51,7 +52,9 @@ axiosClient.interceptors.response.use(async (response) => {
         return axios(originalRequest)
       } else {
         removeItem(KEY_ACCESS_TOKEN)
+
         window.location.replace("/login", "_self")
+        console.log("no refresh token")
         return Promise.reject(error)
       }
     } catch (refreshError) {

@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken")
 const { error } = require("../utils/responseWrapper")
 
 module.exports = async (req, res, next) => {
+  console.log("middleware called")
   if (
     !req.headers ||
     !req.headers.authorization ||
