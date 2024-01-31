@@ -104,11 +104,11 @@ function QuizQuestionCard() {
         >
           {feedback === "Correct" ? (
             <div className=" text-green-700 text-6xl ">
-              <i class="uis uis-check-circle"></i>
+              <i className="uis uis-check-circle"></i>
             </div>
           ) : (
             <div className=" text-red-700 text-6xl ">
-              <i class="uis uis-times-circle"></i>
+              <i className="uis uis-times-circle"></i>
             </div>
           )}
 
@@ -118,7 +118,7 @@ function QuizQuestionCard() {
             Score
             {feedback === "Correct" && (
               <div className="text-green-700">
-                <i class="uil uil-plus-circle mr-1 ml-2"></i>100
+                <i className="uil uil-plus-circle mr-1 ml-2"></i>100
               </div>
             )}
           </div>

@@ -1,5 +1,3 @@
-import { useSelector } from "react-redux"
-import { useNavigate } from "react-router-dom"
 import axios from "axios"
 import { axiosClient } from "../../utils/axiosClient"
 
@@ -12,7 +10,6 @@ export function countCorrect(optionsSelected, answers) {
     return count + (answers[i] === element ? 1 : 0)
   }, 0)
 }
-
 
 // get server data
 export async function getServerData(url, callback) {

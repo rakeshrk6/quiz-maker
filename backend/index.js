@@ -18,7 +18,7 @@ app.use(morgan("tiny"))
 app.use(
   cors({
     credentials: true,
-    origin: "https://quiz-maker-frontend.vercel.app",
+    origin: "http://localhost:3000",
   })
 )
 app.use(bodyParser.json())

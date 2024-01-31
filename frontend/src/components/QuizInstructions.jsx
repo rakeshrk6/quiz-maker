@@ -5,7 +5,6 @@ import { setUserId } from "../redux/slices/ResultReducer"
 // import * as React from "react"
 import Box from "@mui/material/Box"
 
-import Typography from "@mui/material/Typography"
 import Modal from "@mui/material/Modal"
 
 import { setOpen } from "../redux/slices/ShowInstruction"
@@ -29,10 +28,6 @@ function QuizInstructions() {
   const navigate = useNavigate()
   const { open } = useSelector((state) => state.instruction)
 
-  const {
-    result: { optionsSelected, userId, score },
-  } = useSelector((state) => state.rootreducer)
-
   function startQuiz() {
     if (inputRef.current?.value) {
       dispatch(setUserId(inputRef.current?.value))
@@ -54,26 +49,21 @@ function QuizInstructions() {
             className=" text-red-400 text-2xl absolute right-2 top-1 cursor-pointer"
             onClick={() => dispatch(setOpen(false))}
           >
-            <i class="uil uil-times-circle"></i>
+            <i className="uil uil-times-circle"></i>
           </div>
-          <h2 className=" text-xl text-center font-semibold">
+          <h2 className="mb-4 text-xl text-center font-semibold">
             Quiz Instructions
           </h2>
 
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            <div className=" leading-7 py-5">
-              <p>1. You will be asked 20 questions one after another.</p>
-              <p>2. 10 points is awarded for the correct answer.</p>
-              <p>
-                3. Each questions has four options. You can choose any one
-                option.
-              </p>
-              <p>
-                4. You can review and change answers before the quiz finish.
-              </p>
-              <p>5. The result will be shown at the end of the quiz.</p>
-            </div>
-          </Typography>
+          <div className="leading-7 py-7">
+            <p>1. You will be asked 20 questions one after another.</p>
+            <p>2. 10 points is awarded for the correct answer.</p>
+            <p>
+              3. Each questions has four options. You can choose any one option.
+            </p>
+            <p>4. You can review and change answers before the quiz finish.</p>
+            <p>5. The result will be shown at the end of the quiz.</p>
+          </div>
 
           <form onClick={startQuiz} className=" text-center mt-7">
             <input

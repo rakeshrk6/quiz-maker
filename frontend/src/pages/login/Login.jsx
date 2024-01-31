@@ -2,11 +2,7 @@ import React, { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import "../login/login.css"
 import { axiosClient } from "../../utils/axiosClient"
-import {
-  KEY_ACCESS_TOKEN,
-  getItem,
-  setItem,
-} from "../../utils/localStorageManager"
+import { KEY_ACCESS_TOKEN, setItem } from "../../utils/localStorageManager"
 
 function Login() {
   const [email, setEmail] = useState("")
@@ -20,7 +16,6 @@ function Login() {
         email,
         password,
       })
-      console.log("login response", res)
       setItem(KEY_ACCESS_TOKEN, res.result.accessToken)
       navigate("/")
     } catch (error) {

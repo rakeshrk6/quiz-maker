@@ -28,7 +28,7 @@ function QuestionCard() {
                     className="text-[1rem] font-md text-gray-700 cursor-pointer"
                     onClick={() => deleteQuestion(ind)}
                   >
-                    <i class="uil uil-minus-circle text-red-500 px-1 "></i>
+                    <i className="uil uil-minus-circle text-red-500 px-1 "></i>
                     Delete
                   </div>
                 </div>

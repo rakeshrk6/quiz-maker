@@ -47,16 +47,16 @@ function Footer() {
           <h3 className=" text-gray-900">Follow us on Social Media</h3>
           <div className=" flex items-center gap-2 text-2xl">
             <div className=" text-[#4267B2]">
-              <i class="uil uil-facebook"></i>
+              <i className="uil uil-facebook"></i>
             </div>
             <div className=" text-pink-700">
-              <i class="uil uil-instagram"></i>
+              <i className="uil uil-instagram"></i>
             </div>
             <div className=" text-[#00acee]">
-              <i class="uil uil-twitter"></i>
+              <i className="uil uil-twitter"></i>
             </div>
             <div className=" text-[#0072b1]">
-              <i class="uil uil-linkedin"></i>
+              <i className="uil uil-linkedin"></i>
             </div>
           </div>
         </div>

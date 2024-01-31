@@ -2,13 +2,11 @@ const jwt = require("jsonwebtoken")
 const { error } = require("../utils/responseWrapper")
 
 module.exports = async (req, res, next) => {
-  console.log("middleware called")
   if (
     !req.headers ||
     !req.headers.authorization ||
     !req.headers.authorization.startsWith("Bearer")
   ) {
-    console.log("Authorization header is required")
     return res.send(error(401, "Authorization header is required"))
   }
 

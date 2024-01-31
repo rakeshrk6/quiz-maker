@@ -81,7 +81,7 @@ function CreatePage({ Open, close }) {
             className=" text-red-400 text-2xl absolute right-2 top-1 cursor-pointer"
             onClick={() => close()}
           >
-            <i class="uil uil-times-circle"></i>
+            <i className="uil uil-times-circle"></i>
           </div>
           {isLoading ? (
             <div>

@@ -2,7 +2,6 @@ import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { getServerData } from "../components/helper/helper"
 import { addQuizCard } from "../redux/slices/QuizSlice"
-import { axiosClient } from "../utils/axiosClient"
 
 export const useFetchAllQuizs = () => {
   const [getData, setGetData] = useState({
@@ -16,7 +15,7 @@ export const useFetchAllQuizs = () => {
 
     try {
       const quizes = await getServerData(
-        `${process.env.REACT_APP_SERVER_HOSTNAME}/get-quizes/`,
+        `${process.env.REACT_APP_SERVER_HOSTNAME}/get-quizes`,
         (data) => data
       )
 

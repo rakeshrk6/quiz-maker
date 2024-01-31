@@ -2,7 +2,6 @@ import React, { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { axiosClient } from "../../utils/axiosClient"
 import "../signup/signup.css"
-import Navbar from "../../components/header/Navbar"
 
 function Signup() {
   const [username, setUsername] = useState("")
@@ -13,7 +12,7 @@ function Signup() {
   async function handleSubmit(e) {
     e.preventDefault()
     try {
-      const result = await axiosClient.post("/auth/signup", {
+      await axiosClient.post("/auth/signup", {
         username,
         email,
         password,

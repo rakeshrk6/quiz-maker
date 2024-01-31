@@ -9,8 +9,7 @@ export const useFetchQuestion = (id) => {
   const fetchQuestionData = async (id) => {
     try {
       const response = await axiosClient.get(`/api/questions/${id}`)
-      console.log("response", response)
-      const { questions, answers } = response.data
+      const { questions, answers } = response.result.quiz
 
       if (questions && answers && questions.length > 0) {
         dispatch(startExamAction({ questions, answers }))

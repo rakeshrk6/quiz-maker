@@ -13,12 +13,10 @@ export const axiosClient = axios.create({
 
 axiosClient.interceptors.request.use((request) => {
   const accessToken = getItem(KEY_ACCESS_TOKEN)
-  // console.log("accessToken", accessToken)
 
-  const headers = { ...request.headers }
-  headers["Authorization"] = `Bearer ${accessToken}`
+  // const headers = { ...request.headers }
+  request.headers["Authorization"] = `Bearer ${accessToken}`
 
-  console.log("request", request)
   return request
 })
 
@@ -36,10 +34,10 @@ axiosClient.interceptors.response.use(async (response) => {
   if (statusCode === 401 && !originalRequest._retry) {
     originalRequest._retry = true
     try {
-      const res = await axiosClient
+      const res = await axios
         .create({ withCredentials: true })
-        .get(`/auth/refresh`)
-      console.log("response from backend", res)
+        .get(`${process.env.REACT_APP_SERVER_HOSTNAME}/auth/refresh`)
+
       if (res.data.status === "ok") {
         const newAccessToken = res.data.result.accessToken
 
@@ -49,12 +47,12 @@ axiosClient.interceptors.response.use(async (response) => {
         originalRequest.headers["Authorization"] = `Bearer ${newAccessToken}`
 
         // Retry the original request
-        return axios(originalRequest)
+        return axiosClient(originalRequest)
       } else {
         removeItem(KEY_ACCESS_TOKEN)
 
-        // window.location.replace("/login", "_self")
-        console.log("no refresh token")
+        window.location.replace("/login", "_self")
+
         return Promise.reject(error)
       }
     } catch (refreshError) {

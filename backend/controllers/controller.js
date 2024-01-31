@@ -2,6 +2,7 @@ const Quizs = require("../models/quizSchema")
 const Results = require("../models/resultSchema")
 const mongoose = require("mongoose")
 const { ObjectId } = require("mongodb")
+const { success, error } = require("../utils/responseWrapper")
 // ObjectID = require("mongodb").ObjectID
 
 // get all questions
@@ -35,7 +36,7 @@ async function dropQuiz(req, res) {
 async function getResult(req, res) {
   try {
     const r = await Results.find()
-    res.json(r)
+    res.json(success(200, { r }))
   } catch (error) {
     res.json({ error })
   }
@@ -48,7 +49,7 @@ async function postResult(req, res) {
     if (!username && !result) throw new Error("data not provided..!")
 
     await Results.create({ username, result, attempts, points, percentage })
-    res.json("result saved successfully")
+    res.json(success(200, "result saved successfully"))
   } catch (error) {
     res.json({ error })
   }
@@ -68,15 +69,15 @@ async function getQuestions(req, res) {
 
     const quiz = await Quizs.findOne({ _id: id })
     if (!quiz) {
-      return res.status(404).json({ message: "Quiz not found" })
+      return res.send(success(404, "Quiz not found"))
     }
     if (!res.headersSent) {
       // Send the response only if it hasn't been sent yet
-      res.json(quiz)
+      res.json(success(201, { quiz }))
     }
-  } catch (error) {
-    console.error(`Error in getQuestions: ${error}`)
-    res.status(500).json({ message: "Internal server error" })
+  } catch (e) {
+    console.error(`Error in getQuestions: ${e}`)
+    res.send(error(500, "Internal server error"))
   }
 }
 
