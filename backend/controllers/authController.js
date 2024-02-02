@@ -61,8 +61,7 @@ const loginController = async (req, res) => {
       expires: new Date(Date.now() + 25892000000),
       sameSite: "none",
       secure: true,
-      domain: "https://quiz-maker-frontend.vercel.app",
-      httpOnly: true,
+      httpOnly: false,
     })
 
     return res.send(success(201, { accessToken }))
