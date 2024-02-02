@@ -59,9 +59,10 @@ const loginController = async (req, res) => {
 
     res.cookie("jwt", refreshToken, {
       expires: new Date(Date.now() + 25892000000),
-      httpOnly: false,
-      // sameSite: "none",
-      // secure: true,
+      sameSite: "none",
+      secure: true,
+      domain: "https://quiz-maker-frontend.vercel.app",
+      httpOnly: true,
     })
 
     return res.send(success(201, { accessToken }))
