@@ -18,7 +18,7 @@ app.use(morgan("tiny"))
 app.use(
   cors({
     credentials: true,
-    origin: `${process.env.DOMAIN_NAME}`,
+    origin: "https://quizcraftrk.vercel.app",
   })
 )
 app.set("trust proxy", 1)
