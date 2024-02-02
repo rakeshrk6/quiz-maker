@@ -59,8 +59,8 @@ const loginController = async (req, res) => {
 
     res.cookie("jwt", refreshToken, {
       expires: new Date(Date.now() + 25892000000),
-      // httpOnly: true,
-      sameSite: "none",
+      httpOnly: false,
+      // sameSite: "none",
       // secure: true,
     })
 

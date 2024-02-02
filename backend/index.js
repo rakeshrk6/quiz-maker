@@ -21,6 +21,7 @@ app.use(
     origin: "https://quiz-maker-frontend.vercel.app",
   })
 )
+app.set("trust proxy", 1)
 app.use(bodyParser.json())
 app.use(express.json())
 app.use(cookieParser())
