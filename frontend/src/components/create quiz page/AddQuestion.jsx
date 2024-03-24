@@ -1,11 +1,24 @@
-import React, { useRef, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import TextField from "@mui/material/TextField"
-import { Checkbox, FormControlLabel } from "@mui/material"
+import { Box, Checkbox, FormControlLabel, Modal } from "@mui/material"
 import { useDispatch, useSelector } from "react-redux"
 import { addQuestion } from "../../redux/slices/QuestionSlice"
 import toast from "react-hot-toast"
+import axios from "axios"
+import { useAuth } from "../../contexts/AuthContext"
+import useUserQuestions from "../../hooks/fetchUserQuestions"
 
-function AddQuestion() {
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  backgroundColor: "background.paper",
+  boxShadow: 24,
+  py: 2,
+}
+
+function AddQuestion({ Open, close }) {
   const question = useRef("")
   const option1 = useRef("")
   const option2 = useRef("")
@@ -13,8 +26,10 @@ function AddQuestion() {
   const option4 = useRef("")
   const dispatch = useDispatch()
   const [answer, setAnswer] = useState("")
+  const { currentUser } = useAuth()
+  const { questions, fetchData } = useUserQuestions()
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault()
 
     if (
@@ -33,7 +48,7 @@ function AddQuestion() {
       return
     }
     const formData = {
-      questions: {
+      question: {
         question: question.current.value,
         options: [
           option1.current.value,
@@ -42,16 +57,19 @@ function AddQuestion() {
           option4.current.value,
         ],
       },
-      answers: answer,
+      answer: answer,
     }
 
-    dispatch(addQuestion(formData))
-    question.current.value = ""
-    option1.current.value = ""
-    option2.current.value = ""
-    option3.current.value = ""
-    option4.current.value = ""
-    setAnswer("")
+    const res = await axios.post(
+      `${process.env.REACT_APP_SERVER_HOSTNAME}/api/question/${currentUser.uid}`,
+      formData
+    )
+
+    console.log(res)
+    // refresh updated questions
+    await fetchData()
+
+    close()
   }
 
   const handleCheck = (event) => {
@@ -59,101 +77,111 @@ function AddQuestion() {
   }
 
   return (
-    <div className=" bg-[#fffae5] pb-16">
-      <div className=" text-center py-8 text-2xl font-semibold">
-        Add Questions here
-      </div>
-      <div className="bg-slate-50 flex justify-center max-w-2xl rounded-md mx-auto shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
-        <form
-          onSubmit={handleSubmit}
-          className="flex flex-col w-full gap-5 m-12"
-        >
-          <div className=" mr-[7.5rem]">
-            <TextField
-              inputRef={question}
-              fullWidth
-              multiline
-              id="question"
-              label="Enter Question"
-              variant="outlined"
-            />
-          </div>
-          <div className="flex items-center">
-            <TextField
-              inputRef={option1}
-              fullWidth
-              size="small"
-              id="option1"
-              label="Option-1"
-              variant="outlined"
-            />
-            <div className=" ml-5">
-              <FormControlLabel
-                control={<Checkbox onClick={handleCheck} value={1} />}
-                label="Correct"
-              />
-            </div>
-          </div>
-          <div className="flex items-center">
-            <TextField
-              inputRef={option2}
-              fullWidth
-              size="small"
-              id="option2"
-              label="Option-2"
-              variant="outlined"
-            />
-            <div className=" ml-5">
-              <FormControlLabel
-                control={<Checkbox onClick={handleCheck} value={2} />}
-                label="Correct"
-              />
-            </div>
-          </div>
-          <div className="flex items-center">
-            <TextField
-              inputRef={option3}
-              fullWidth
-              size="small"
-              id="option3"
-              label="Option-3"
-              variant="outlined"
-            />
-            <div className=" ml-5">
-              <FormControlLabel
-                control={<Checkbox onClick={handleCheck} value={3} />}
-                label="Correct"
-              />
-            </div>
-          </div>
-          <div className="flex items-center">
-            <TextField
-              inputRef={option4}
-              fullWidth
-              size="small"
-              id="option4"
-              label="Option-4"
-              variant="outlined"
-            />
-            <div className=" ml-5">
-              <FormControlLabel
-                control={<Checkbox onClick={handleCheck} value={4} />}
-                label="Correct"
-              />
-            </div>
+    <div className={`flex justify-center items-center bg-white z-50`}>
+      <Modal
+        open={true}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box className="flex justify-center rounded-lg sm:px-10 " sx={style}>
+          <div
+            className=" text-red-400 text-2xl absolute right-2 top-1 cursor-pointer"
+            onClick={() => close()}
+          >
+            <i className="uil uil-times-circle"></i>
           </div>
 
-          <div className=" text-center mt-5">
-            <button
-              onSubmit={handleSubmit}
-              className="bg-[#3b82f6] py-2 px-9 rounded-md text-white"
-              type="submit"
-            >
-              Add
-            </button>
-          </div>
-        </form>
-      </div>
+          <form
+            onSubmit={handleSubmit}
+            className="flex flex-col gap-5 sm:mx-12 mx-6 mt-10 mb-5 sm:w-[53vw] w-[80vw]"
+          >
+            <div className=" mr-[7.5rem]">
+              <TextField
+                inputRef={question}
+                fullWidth
+                multiline
+                id="question"
+                label="Enter Question"
+                variant="outlined"
+              />
+            </div>
+            <div className="flex items-center">
+              <TextField
+                inputRef={option1}
+                fullWidth
+                size="small"
+                id="option1"
+                label="Option-1"
+                variant="outlined"
+              />
+              <div className=" ml-5">
+                <FormControlLabel
+                  control={<Checkbox onClick={handleCheck} value={1} />}
+                  label="Correct"
+                />
+              </div>
+            </div>
+            <div className="flex items-center">
+              <TextField
+                inputRef={option2}
+                fullWidth
+                size="small"
+                id="option2"
+                label="Option-2"
+                variant="outlined"
+              />
+              <div className=" ml-5">
+                <FormControlLabel
+                  control={<Checkbox onClick={handleCheck} value={2} />}
+                  label="Correct"
+                />
+              </div>
+            </div>
+            <div className="flex items-center">
+              <TextField
+                inputRef={option3}
+                fullWidth
+                size="small"
+                id="option3"
+                label="Option-3"
+                variant="outlined"
+              />
+              <div className=" ml-5">
+                <FormControlLabel
+                  control={<Checkbox onClick={handleCheck} value={3} />}
+                  label="Correct"
+                />
+              </div>
+            </div>
+            <div className="flex items-center">
+              <TextField
+                inputRef={option4}
+                fullWidth
+                size="small"
+                id="option4"
+                label="Option-4"
+                variant="outlined"
+              />
+              <div className=" ml-5">
+                <FormControlLabel
+                  control={<Checkbox onClick={handleCheck} value={4} />}
+                  label="Correct"
+                />
+              </div>
+            </div>
+
+            <div className=" text-center mt-5">
+              <button
+                onSubmit={handleSubmit}
+                className="bg-[#3b82f6] sm:py-2 py-1 sm:px-9 px-5 rounded-md text-white"
+                type="submit"
+              >
+                Add
+              </button>
+            </div>
+          </form>
+        </Box>
+      </Modal>
     </div>
   )
 }

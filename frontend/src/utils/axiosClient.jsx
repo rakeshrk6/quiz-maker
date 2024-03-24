@@ -23,6 +23,9 @@ axiosClient.interceptors.request.use((request) => {
 axiosClient.interceptors.response.use(async (response) => {
   const data = response.data
   if (data.status === "ok") {
+    return response
+  }
+  if (data.statusCode == 404 || data.statusCode == 403) {
     return data
   }
 

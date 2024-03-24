@@ -4,17 +4,17 @@ import { Link } from "react-router-dom"
 function HeroSection() {
   return (
     <div id="hero-section">
-      <div className="bg-[#0f1048] h-[28.5rem] flex flex-col gap-9 items-center mt-[70px]">
-        <div className="text-6xl font-semibold text-white mt-20">
+      <div className="bg-[#0f1048] sm:h-[28.5rem] h-[23rem] flex flex-col gap-9 items-center mt-[70px]">
+        <div className=" text-3xl sm:text-6xl font-semibold text-white mt-16 sm:mt-20">
           Free online <span className="text-amber-600">quiz maker</span>
         </div>
-        <div className="text-xl text-white max-w-[52rem] text-center leading-9">
+        <div className="sm:text-xl text-white max-w-[52rem] px-5 text-center sm:leading-9">
           Make a quiz with different question types to engage students in a
           classroom, train employees at work, or play trivia with friends.
         </div>
         <div className="mt-7">
           <Link to="/create-quiz">
-            <button className="p-4 text-xl px-10 rounded-lg hover:bg-transparent hover:outline hover:outline-1 hover:text-white text-blue-950 bg-slate-50">
+            <button className="sm:p-4 p-2 sm:text-xl sm:px-10 px-5 rounded-lg hover:bg-transparent hover:outline hover:outline-1 hover:text-white text-blue-950 bg-slate-50">
               Create a quiz
             </button>
           </Link>

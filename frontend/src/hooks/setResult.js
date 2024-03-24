@@ -17,13 +17,3 @@ export const usePublishResult = (resultData) => {
     }
   })()
 }
-//insert quiz questions
-export const PublishQuiz = (quiz) => {
-  ;(async () => {
-    try {
-      await axiosClient.post("/api/quiz", quiz)
-    } catch (error) {
-      console.log(error)
-    }
-  })()
-}

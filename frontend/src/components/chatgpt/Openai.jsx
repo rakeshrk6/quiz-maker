@@ -5,19 +5,18 @@ function Openai() {
   const [isOpen, setOpen] = useState(false)
 
   const toggleComponent = () => {
-    console.log("clicked")
     setOpen(!isOpen)
   }
 
   return (
     <div>
-      <div className="flex flex-col items-center  py-16 bg-slate-100">
-        <div className="text-3xl font-bold mb-9 text-gray-800">
+      <div className="flex flex-col items-center py-14 sm:py-16 bg-slate-100">
+        <div className="text-xl text-center px-5 sm:text-3xl font-bold mb-9 text-gray-800">
           Make your own quiz with our
           <span className="text-amber-500"> realtime</span> quiz maker using{" "}
           <span className="text-sky-600">ChatGPT</span>
         </div>
-        <div className="max-w-5xl text-xl text-center text-gray-700 leading-9  ">
+        <div className="max-w-5xl px-6 sm:text-xl text-center text-gray-700 sm:leading-9  ">
           An OpenAI-powered online quiz maker streamlines quiz creation with
           advanced natural language processing, providing educators and
           organizations an intuitive and efficient tool to generate diverse and
@@ -25,7 +24,7 @@ function Openai() {
         </div>
         <button
           onClick={toggleComponent}
-          className="p-4 text-md px-10 rounded-full hover:bg-blue-600 text-white bg-[#0071f2] mt-12 "
+          className="sm:p-4 p-2 sm:text-md text-sm sm:px-10 px-5 rounded-full hover:bg-blue-600 text-white bg-[#0071f2] sm:mt-12 mt-9 "
         >
           Take Quiz by GPT
         </button>

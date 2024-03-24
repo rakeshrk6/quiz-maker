@@ -7,7 +7,7 @@ const quizModel = new Schema({
   name: { type: String, default: "" },
   questions: { type: Array, default: [] },
   answers: { type: Array, default: [] },
-  userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+  userId: { type: String, require: true, unique: true },
   createdAt: { type: Date, default: Date().toLocaleString() },
 })
 

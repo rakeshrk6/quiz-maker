@@ -1,11 +1,12 @@
 import React from "react"
 
 import { Navigate, Outlet } from "react-router-dom"
-import { KEY_ACCESS_TOKEN, getItem } from "./localStorageManager"
+import { useAuth } from "../contexts/AuthContext"
 
 function RequireUser() {
-  const user = getItem(KEY_ACCESS_TOKEN)
-  return user ? <Outlet /> : <Navigate to="/login" />
+  const { currentUser } = useAuth()
+
+  return currentUser ? <Outlet /> : <Navigate to="/login" />
 }
 
 export default RequireUser

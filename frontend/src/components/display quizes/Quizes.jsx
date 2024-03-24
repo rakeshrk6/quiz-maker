@@ -19,15 +19,15 @@ function Quizes() {
     }
   }, [])
   return (
-    <div className="py-[5rem]" id="quizes">
-      <div className="text-center text-[1.7rem] leading-7 font-semibold text-gray-800">
+    <div className="sm:pt-[5rem] py-[2rem]" id="quizes">
+      <div className="text-center text-xl sm:text-[1.7rem] leading-7 font-semibold text-gray-800">
         Get started with these <span className=" text-amber-500">popular</span>{" "}
         online quizzes
       </div>
-      <div className="flex justify-center max-w-5xl items-center mx-auto py-16">
-        <div className="grid grid-cols-4 justify-center gap-10 w-full">
+      <div className="flex justify-center sm:max-w-5xl items-center mx-auto sm:py-16 py-9">
+        <div className="grid sm:grid-cols-4 justify-center sm:gap-10 gap-5 w-full">
           {quiz.length > 0 ? (
-            quiz.map((obj, ind) => <QuizItem items={obj} key={obj.id} />)
+            quiz.map((obj) => <QuizItem items={obj} key={obj.id} />)
           ) : (
             <div>No quiz available</div>
           )}

@@ -3,10 +3,19 @@ const { error } = require("../utils/responseWrapper")
 
 module.exports = async (req, res, next) => {
   if (
+    req.user // Check if user is authenticated via Google OAuth
+  ) {
+    // If user is authenticated via Google, skip this middleware
+    console.log("gogole")
+    return next()
+  }
+
+  if (
     !req.headers ||
     !req.headers.authorization ||
     !req.headers.authorization.startsWith("Bearer")
   ) {
+    console.log("request", req.user)
     return res.send(error(401, "Authorization header is required"))
   }
 

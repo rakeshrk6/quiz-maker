@@ -55,7 +55,7 @@ function CreatePage({ Open, close }) {
           throw new Error("No Question Available")
         }
 
-        console.log("output", quiz_name, questions, answers)
+        // console.log("output", quiz_name, questions, answers)
       } catch (error) {
         console.log(error)
       } finally {
@@ -76,7 +76,7 @@ function CreatePage({ Open, close }) {
         aria-describedby="modal-modal-description"
         className={` ${Open ? "backdrop-blur" : ""} `}
       >
-        <Box className="flex justify-center rounded-lg px-10" sx={style}>
+        <Box className="flex justify-center rounded-lg sm:px-10" sx={style}>
           <div
             className=" text-red-400 text-2xl absolute right-2 top-1 cursor-pointer"
             onClick={() => close()}
@@ -94,12 +94,12 @@ function CreatePage({ Open, close }) {
               </h1>
             </div>
           ) : isGotOutput ? (
-            <div className="w-[50vh] flex flex-col justify-center items-center py-20  ">
+            <div className="sm:w-[50vh] flex flex-col justify-center items-center py-20  ">
               <h1 className="text-3xl text-center font-medium pb-3">
                 Hurray! Your Quiz Generated
               </h1>
               <div className=" text-green-700 text-5xl ">
-                <i class="uis uis-check-circle"></i>
+                <i className="uis uis-check-circle"></i>
               </div>
 
               <button
@@ -110,7 +110,7 @@ function CreatePage({ Open, close }) {
               </button>
             </div>
           ) : (
-            <form className="flex flex-col gap-5 m-12 w-[50vh]">
+            <form className="flex flex-col gap-5 m-12 sm:w-[50vh] w-[53vw]">
               <TextField
                 inputRef={topic_name}
                 fullWidth
@@ -140,7 +140,7 @@ function CreatePage({ Open, close }) {
 
               <button
                 onClick={handleSubmit}
-                className=" bg-green-600 rounded-md p-3 px-3 text-md mx-auto text-white w-40 mt-10"
+                className=" bg-green-600 rounded-md sm:p-3 p-2 sm:px-3  sm:text-md mx-auto text-white w-40 mt-10"
               >
                 Create Quiz
               </button>

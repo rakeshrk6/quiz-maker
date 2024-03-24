@@ -18,7 +18,7 @@ app.use(morgan("tiny"))
 app.use(
   cors({
     credentials: true,
-    origin: "https://quizcraftrk.vercel.app",
+    origin: "http://localhost:3000",
   })
 )
 app.set("trust proxy", 1)
@@ -27,9 +27,9 @@ app.use(express.json())
 app.use(cookieParser())
 
 //routes
-app.use("/api", requireUser, router) //apis
+app.use("/api", router) //apis
 app.use("/get-quizes", router)
-app.use("/auth", authRouter)
+// app.use("/auth", authRouter)
 // chatgpt api
 app.use("/chatgpt", router)
 
@@ -53,5 +53,5 @@ connect()
     }
   })
   .catch((error) => {
-    console.log("invalid database connection")
+    console.log("invalid database connection", error)
   })

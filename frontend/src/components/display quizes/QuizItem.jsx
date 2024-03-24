@@ -3,14 +3,20 @@ import { useNavigate } from "react-router-dom"
 import { useFetchQuestion } from "../../hooks/FetchQuestion"
 import { useDispatch } from "react-redux"
 import { setOpen } from "../../redux/slices/ShowInstruction"
+import { useAuth } from "../../contexts/AuthContext"
 
 function QuizItem({ items }) {
   const [fetchQuestionData] = useFetchQuestion()
-
+  const { currentUser } = useAuth()
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
   function handleClick() {
+    if (!currentUser) {
+      navigate("/login")
+      return
+    }
+
     fetchQuestionData(items.id)
     dispatch(setOpen(true))
     // navigate("/instructions")
@@ -23,8 +29,8 @@ function QuizItem({ items }) {
     >
       <div className="overflow-hidden rounded-t-lg">
         <img
-          className=" "
-          src="https://prod.smassets.net/assets/content/sm/related-content-template-grammar-quiz-use-cases-online-quiz.webp"
+          className="h-40"
+          src="https://images.foolproofonline.info/images/quiztime.m3-w800-16-9.jpg"
           alt=""
         />
       </div>

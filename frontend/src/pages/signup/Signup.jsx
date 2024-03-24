@@ -1,32 +1,53 @@
 import React, { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
-import { axiosClient } from "../../utils/axiosClient"
 import "../signup/signup.css"
+import toast from "react-hot-toast"
+
+import { useAuth } from "../../contexts/AuthContext"
 
 function Signup() {
   const [username, setUsername] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [invalidMessage, setMessage] = useState("")
+  const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
+  const { signup, currentUser } = useAuth()
+
+  const handleEmailChange = (event) => {
+    const inputValue = event.target.value
+    setEmail(inputValue)
+  }
 
   async function handleSubmit(e) {
     e.preventDefault()
+
     try {
-      await axiosClient.post("/auth/signup", {
-        username,
-        email,
-        password,
+      setMessage("")
+      setLoading(true)
+      await signup(email, password)
+      toast.success("You are Signed Up", {
+        duration: 4000,
+        style: {
+          padding: "10px",
+          background: "#333",
+          color: "#fff",
+        },
       })
-      navigate("/login")
+      navigate("/profile")
     } catch (error) {
       console.log(error)
+      setMessage("failed to sign up")
     }
+    setLoading(false)
   }
 
   return (
     <div className="Signup mt-[20px] bg-gradient-to-r from-indigo-500 to-green-200 h-screen">
       <div className="signup-box rounded-lg bg-black bg-opacity-60">
         <h2 className="heading text-white text-xl font-medium mb-10">Signup</h2>
+        <p className=" text-center text-red-400">{invalidMessage}</p>
+
         <form onSubmit={handleSubmit}>
           <label htmlFor="username">Username</label>
           <input
@@ -39,9 +60,9 @@ function Signup() {
           <label htmlFor="email">Email</label>
           <input
             type="email"
-            className="email bg-black bg-opacity-50"
+            className={` bg-black bg-opacity-50  `}
             id="email"
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={handleEmailChange}
           />
 
           <label htmlFor="password">Password</label>
@@ -52,10 +73,18 @@ function Signup() {
             onChange={(e) => setPassword(e.target.value)}
           />
 
-          <input type="submit" className="submit cursor-pointer" />
+          <input
+            disabled={loading}
+            type="submit"
+            value="Sign Up"
+            className="submit cursor-pointer"
+          />
         </form>
         <p className="subheading text-gray-400">
-          Already have an account? <Link to="/login">Log In</Link>
+          Already have an account?{" "}
+          <Link to="/login">
+            <span className=" text-black underline">Log In</span>
+          </Link>
         </p>
       </div>
     </div>

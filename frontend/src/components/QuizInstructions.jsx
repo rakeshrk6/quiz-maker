@@ -44,18 +44,21 @@ function QuizInstructions() {
         aria-describedby="modal-modal-description"
         className={` ${open ? "backdrop-blur" : ""} `}
       >
-        <Box className="rounded-lg px-20" sx={style}>
+        <Box
+          className="rounded-lg sm:px-20 px-7 w-[85vw] sm:w-[50vw]"
+          sx={style}
+        >
           <div
             className=" text-red-400 text-2xl absolute right-2 top-1 cursor-pointer"
             onClick={() => dispatch(setOpen(false))}
           >
             <i className="uil uil-times-circle"></i>
           </div>
-          <h2 className="mb-4 text-xl text-center font-semibold">
+          <h2 className="mb-4 sm:text-xl text-center font-semibold">
             Quiz Instructions
           </h2>
 
-          <div className="leading-7 py-7">
+          <div className="leading-7 py-7 sm:text-base text-xs ">
             <p>1. You will be asked 20 questions one after another.</p>
             <p>2. 10 points is awarded for the correct answer.</p>
             <p>
@@ -65,15 +68,15 @@ function QuizInstructions() {
             <p>5. The result will be shown at the end of the quiz.</p>
           </div>
 
-          <form onClick={startQuiz} className=" text-center mt-7">
+          <form onClick={startQuiz} className=" text-center sm:mt-7">
             <input
-              className=" border-gray-500 border-2 rounded-md text-sm p-2"
+              className=" border-gray-500 border-2 rounded-md sm:text-sm text-xs sm:p-2 p-1"
               ref={inputRef}
               type="text"
               placeholder="Username"
             />
 
-            <button className=" bg-green-600 rounded-md p-2 px-3 text-sm text-white ml-2">
+            <button className=" bg-green-600 rounded-md sm:p-2 p-1 px-2 sm:px-3 sm:text-sm text-xs text-white ml-2">
               Start Quiz
             </button>
           </form>

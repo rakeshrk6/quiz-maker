@@ -4,13 +4,12 @@ export const QuestionSlice = createSlice({
   name: "question",
   initialState: {
     questions: [],
-    answers: [],
   },
   reducers: {
     addQuestion: (state, action) => {
-      const { questions, answers } = action.payload
-      state.questions.push(questions)
-      state.answers.push(answers)
+      const { questions } = action.payload
+      state.questions = questions
+      // state.answers.push(answers)
     },
 
     deleteQuestions: (state, action) => {

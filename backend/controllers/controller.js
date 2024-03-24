@@ -3,6 +3,7 @@ const Results = require("../models/resultSchema")
 const mongoose = require("mongoose")
 const { ObjectId } = require("mongodb")
 const { success, error } = require("../utils/responseWrapper")
+const UserQuestions = require("../models/UserQuestions")
 // ObjectID = require("mongodb").ObjectID
 
 // get all questions
@@ -18,18 +19,35 @@ async function getQuizs(req, res) {
 // post all questions
 async function insertQuiz(req, res) {
   try {
-    const { _id, name, questions, answers } = req.body
-
-    await Quizs.insertMany({ _id, name, questions, answers })
+    const { quizName } = req.body
+    const userId = req.params.userId
+    const response = await UserQuestions.findOne({ userId })
+    const { Questions, Answers } = response
+    // console.log(response)
+    const respond = await Quizs.insertMany({
+      name: quizName,
+      questions: Questions,
+      answers: Answers,
+      userId,
+    })
+    res.json(success(200, respond))
     console.log("data saved successfully")
-  } catch (error) {
-    res.json({ error })
+  } catch (e) {
+    res.json(error(400, e.message))
   }
 }
 
-// delete all questions
+// delete a quiz
 async function dropQuiz(req, res) {
-  res.json("questions api delete request")
+  try {
+    const id = req.params._id
+    const _id = new ObjectId(id)
+    const response = await Quizs.findByIdAndDelete(_id)
+    console.log(response)
+    res.json(success(200, { response }))
+  } catch (error) {
+    res.json({ error })
+  }
 }
 
 // get all result
@@ -81,6 +99,25 @@ async function getQuestions(req, res) {
   }
 }
 
+// get quizes of a user
+async function getUserQuizes(req, res) {
+  try {
+    const userId = req.params.userId
+
+    const quiz = await Quizs.find({ userId })
+    if (!quiz) {
+      return res.send(success(404, "Quiz not found"))
+    }
+    if (!res.headersSent) {
+      // Send the response only if it hasn't been sent yet
+      res.json(success(201, { quiz }))
+    }
+  } catch (e) {
+    console.error(`Error in getQuiz: ${e}`)
+    res.send(error(500, "Internal server error"))
+  }
+}
+
 module.exports = {
   getQuizs,
   insertQuiz,
@@ -89,4 +126,5 @@ module.exports = {
   getResult,
   dropResult,
   getQuestions,
+  getUserQuizes,
 }

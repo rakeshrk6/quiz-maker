@@ -23,15 +23,13 @@ function QuizQuestionCard() {
   const questions = queue[trace]
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  let timeOutId
 
   useEffect(() => {
     if (trace < queue.length) {
       const timeOutId = setTimeout(() => {
         // console.log(trace)
         // console.log(optionsSelected)
-
-        moveNext()
+        // moveNext()
       }, 10000)
 
       return () => {
@@ -73,20 +71,20 @@ function QuizQuestionCard() {
   }
 
   return (
-    <div className="px-10 pt-10 flex items-center justify-between">
+    <div className="lg:px-10 pt-8 lg:pt-10 flex items-center justify-between">
       {!showFeedback ? (
         <div>
-          <h2 className=" text-2xl font-medium text-center px-14">
+          <h2 className="text-md lg:text-2xl font-medium text-center px-14">
             {questions?.question}
           </h2>
-          <div className=" pt-52">
+          <div className="pt-32 lg:pt-52">
             <ul key={questions?.id} className="flex flex-wrap">
               {questions?.options.map((opt, ind) => (
                 <li key={ind} className="w-1/2 p-3">
                   <div
-                    className={`p-5 pl-8 ${
+                    className={`lg:p-5 py-4 lg:pl-8 text-center ${
                       checked === ind + 1 ? "bg-[#29802d]" : "bg-blue-500"
-                    } rounded-lg text-white font-medium text-lg cursor-pointer transition duration-200 ease-in-out`}
+                    } rounded-lg text-white font-medium text-sm lg:text-lg cursor-pointer transition duration-200 ease-in-out`}
                     onClick={() => onSelect(ind + 1)}
                   >
                     {opt}

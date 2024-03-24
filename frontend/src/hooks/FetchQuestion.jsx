@@ -1,15 +1,22 @@
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { startExamAction } from "../redux/slices/QuestionReducer"
 import { axiosClient } from "../utils/axiosClient"
 import { updateLength } from "../redux/slices/ResultReducer"
+import axios from "axios"
+import { useAuth } from "../contexts/AuthContext"
 
 export const useFetchQuestion = (id) => {
   const dispatch = useDispatch()
-
+  const { currenUser } = useAuth()
   const fetchQuestionData = async (id) => {
     try {
-      const response = await axiosClient.get(`/api/questions/${id}`)
-      const { questions, answers } = response.result.quiz
+      const response = await axios.get(
+        `${process.env.REACT_APP_SERVER_HOSTNAME}/api/questions/${id}`,
+        { withCredentials: true }
+      )
+
+      console.log("response", response)
+      const { questions, answers } = response.data.result.quiz
 
       if (questions && answers && questions.length > 0) {
         dispatch(startExamAction({ questions, answers }))

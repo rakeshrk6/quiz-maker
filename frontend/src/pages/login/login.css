@@ -10,11 +10,20 @@
 }
 
 .Login .login-box {
-  padding: 40px;
+  padding: 30px 40px;
   min-width: 400px;
   /* border: 1px solid black; */
   /* border-radius: 4px; */
 }
+
+@media only screen and (max-width: 670px) {
+  .Login .login-box {
+    padding: 20px;
+    min-width: 350px;
+
+  }
+}
+
 
 .Login label,
 .Login input {
