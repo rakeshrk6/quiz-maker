@@ -69,7 +69,7 @@ function QuizPage() {
 
   return (
     <div className="mt-[70px]">
-      <div className=" flex items-center justify-between gap-6 fixed mb-10 mt-24 sm:w-[50vw] w-[96vw] bg-slate-100 sm:py-5 py-4 -top-4 left-1/2 transform -translate-x-1/2 sm:px-8 px-2 rounded-md outline outline-1 outline-gray-300">
+      <div className=" flex items-center justify-between gap-6 fixed z-50 mb-10 mt-24 sm:w-[50vw] w-[96vw] bg-slate-100 sm:py-5 py-4 -top-4 left-1/2 transform -translate-x-1/2 sm:px-8 px-2 rounded-md outline outline-1 outline-gray-300">
         <button
           onClick={toggleComponent}
           className="hidden sm:flex sm:p-3 p-1 sm:text-md text-xs sm:px-8 px-2 rounded-full hover:bg-blue-600 text-white bg-[#0071f2] "

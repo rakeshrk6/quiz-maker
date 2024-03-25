@@ -29,8 +29,8 @@ function QuizQuestionCard() {
       const timeOutId = setTimeout(() => {
         // console.log(trace)
         // console.log(optionsSelected)
-        // moveNext()
-      }, 10000)
+        moveNext()
+      }, 8000)
 
       return () => {
         clearTimeout(timeOutId)
@@ -51,7 +51,7 @@ function QuizQuestionCard() {
 
       setShowFeedback(false)
       setFeedback("Wrong")
-    }, 5000)
+    }, 4000)
   }
 
   async function onSelect(i) {
@@ -64,10 +64,10 @@ function QuizQuestionCard() {
       setFeedback("Correct")
     }
 
-    // setTimeout(() => {
-    //   // clearInterval(timeOutId)
-    //   moveNext()
-    // }, 1000)
+    setTimeout(() => {
+      // clearInterval(timeOutId)
+      moveNext()
+    }, 2000)
   }
 
   return (
@@ -96,7 +96,7 @@ function QuizQuestionCard() {
         </div>
       ) : (
         <div
-          className={`mb-20 rounded-2xl text-center px-32 py-14 shadow-[0_3px_10px_rgb(0,0,0,0.2)] ${
+          className={`mb-20 rounded-2xl text-center sm:px-32 px-20 py-14 shadow-[0_3px_10px_rgb(0,0,0,0.2)] ${
             feedback === "Correct" ? "bg-green-200" : "bg-red-200"
           }`}
         >

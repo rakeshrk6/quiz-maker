@@ -33,8 +33,8 @@ function Result() {
   }, [optionsSelected, answers, dispatch])
 
   return (
-    <div className="flex pt-12 sm:pt-0 sm:items-center justify-center bg-gradient-to-r from-indigo-500 to-green-200 h-screen">
-      <div className=" w-[38vh] h-[55vh] sm:h-[78vh] sm:w-[36%] rounded-xl bg-black bg-opacity-60 mt-[5rem]">
+    <div className="flex py-12 pb-60 sm:pt-0 sm:items-center justify-center bg-gradient-to-r from-indigo-500 to-green-200 ">
+      <div className=" w-[80vw]  sm:h-[78vh] sm:w-[36%] rounded-xl bg-black bg-opacity-60 mt-[5rem]">
         <div className=" p-7 flex flex-col gap-5 text-sm">
           <div className="text-[#dbdbdb] text-center text-lg -mt-2">Result</div>
           <div className="  bg-[#151515] flex items-center text-white rounded-xl">
@@ -77,11 +77,11 @@ function Result() {
           <div className="flex gap-3 text-xs">
             <div className="p-2 bg-[#151515] flex flex-col items-center justify-center text-white rounded-xl w-1/3">
               <span className=" mb-2 text-xl sm:text-2xl">{correct}</span>
-              <span className="sm:text-base text-xs">Correct</span>
+              <span className="sm:text-sm text-xs">Correct</span>
             </div>
             <div className="  bg-[#151515] flex flex-col items-center justify-center text-white rounded-xl w-1/3">
               <span className=" mb-2 text-xl sm:text-2xl">0</span>
-              <span className="sm:text-base text-[0.6rem] text-center">
+              <span className="sm:text-sm text-[0.6rem] text-center">
                 Partially Correct
               </span>
             </div>
@@ -90,7 +90,7 @@ function Result() {
               <span className=" mb-2 text-xl sm:text-2xl">
                 {queue.length - correct}
               </span>
-              <span className="sm:text-base text-xs">Incorrect</span>
+              <span className="sm:text-sm text-xs">Incorrect</span>
             </div>
           </div>
         </div>

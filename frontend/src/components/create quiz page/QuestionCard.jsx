@@ -38,25 +38,25 @@ function QuestionCard() {
   return (
     <>
       {questions.length > 0 ? (
-        <div className="py-24 px-[8rem] bg-[#f2f2f2]">
+        <div className="sm:py-24 py-32 sm:px-[8rem] bg-[#f2f2f2]">
           <button
             onClick={deleteAll}
-            className="bg-red-400 py-1 px-3 text-sm rounded-md absolute right-32 text-gray-100 top-32"
+            className="bg-red-400 sm:py-1 py-0.5 px-2 sm:px-3 sm:text-sm text-xs rounded-md absolute right-32 text-gray-100 sm:top-32 top-[11rem]"
           >
             Delete All
           </button>
-          <div className="outline outline-1 outline-gray-300 px-14 py-8 bg-white rounded-md">
+          <div className="outline outline-1 outline-gray-300 sm:px-14 px-3 sm:py-3 bg-white rounded-md">
             {questions.map((obj, ind) => (
               <div
                 key={ind}
-                className="py-8 border-b-[1.4px] border-solid border-gray-300"
+                className="sm:py-6 py-3 border-b-[1.4px] border-solid border-gray-300"
               >
                 <div className="flex items-center justify-between">
-                  <h2 className=" pb-3 text-lg">{`${ind + 1}. ${
+                  <h2 className=" pb-3 text-sm sm:text-lg">{`${ind + 1}. ${
                     obj.question
                   }`}</h2>
                   <div
-                    className="text-[1rem] font-md text-gray-700 cursor-pointer"
+                    className="sm:text-[1rem] text-[0.7rem] font-md text-gray-700 cursor-pointer"
                     onClick={() => deleteQuestion(ind)}
                   >
                     <i className="uil uil-minus-circle text-red-500 px-1 "></i>
@@ -74,7 +74,7 @@ function QuestionCard() {
                         id={`option${ind + 1}`}
                       />
                       <label
-                        className="px-3 text-base text-gray-700"
+                        className="px-3 sm:text-base text-xs text-gray-700"
                         htmlFor={`option${ind + 1}`}
                       >
                         {opt}

@@ -12,7 +12,7 @@ function GetStarted() {
         <h1 className=" sm:text-[2.25rem] text-lg leading-5 sm:leading-6 font-[400]">
           QuizCraft is a powerful online test generator
         </h1>
-        <p className="text-sm sm:text-[1rem] font-[400]">
+        <p className="text-xs sm:text-[1rem] font-[400]">
           Build your own online tests and assessments with QuizCraft for free
         </p>
         <button
