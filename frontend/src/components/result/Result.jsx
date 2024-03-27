@@ -12,7 +12,7 @@ function Result() {
   } = useSelector((state) => state.rootreducer)
 
   const correct = countCorrect(optionsSelected, answers)
-  const percentage = ((correct / queue.length) * 100).toFixed(1)
+  const percentage = ((correct / queue.length) * 100).toFixed(0)
   const dispatch = useDispatch()
 
   // // store user result
@@ -33,7 +33,7 @@ function Result() {
   }, [optionsSelected, answers, dispatch])
 
   return (
-    <div className="flex py-12 pb-60 sm:pt-0 sm:items-center justify-center bg-gradient-to-r from-indigo-500 to-green-200 ">
+    <div className="flex py-12 pb-60 sm:pt-5 sm:items-center justify-center bg-gradient-to-r from-indigo-500 to-green-200 ">
       <div className=" w-[80vw]  sm:h-[78vh] sm:w-[36%] rounded-xl bg-black bg-opacity-60 mt-[5rem]">
         <div className=" p-7 flex flex-col gap-5 text-sm">
           <div className="text-[#dbdbdb] text-center text-lg -mt-2">Result</div>

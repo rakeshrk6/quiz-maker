@@ -1,7 +1,15 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { Link } from "react-router-dom"
+import { resetResult } from "../../redux/slices/ResultReducer"
+import { useDispatch } from "react-redux"
+import { reset } from "../../redux/slices/QuestionReducer"
 
 function HeroSection() {
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(resetResult())
+    dispatch(reset())
+  }, [])
   return (
     <div id="hero-section">
       <div className="bg-[#0f1048] sm:h-[28.5rem] h-[23rem] flex flex-col gap-9 items-center mt-[70px]">

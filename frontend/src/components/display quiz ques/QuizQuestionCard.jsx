@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useRef } from "react"
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 
@@ -8,9 +8,11 @@ import { addScore, updateResultAction } from "../../redux/slices/ResultReducer"
 
 function QuizQuestionCard() {
   const [checked, setChecked] = useState(undefined)
-
+  const [countdown, setCountdown] = useState(10)
   const [showFeedback, setShowFeedback] = useState(false)
   const [feedback, setFeedback] = useState("Wrong")
+  const intervalId = useRef(null)
+  const timeoutId = useRef(null)
   const { queue, trace, answers } = useSelector(
     (state) => state.rootreducer.questions
   )
@@ -26,21 +28,39 @@ function QuizQuestionCard() {
 
   useEffect(() => {
     if (trace < queue.length) {
-      const timeOutId = setTimeout(() => {
+      timeoutId.current = setTimeout(() => {
+        if (checked === undefined) {
+          clearTimeout(timeoutId.current)
+          moveNext()
+        }
         // console.log(trace)
         // console.log(optionsSelected)
-        moveNext()
-      }, 8000)
+      }, 10000)
 
       return () => {
-        clearTimeout(timeOutId)
+        clearTimeout(timeoutId.current)
       }
     }
 
     if (trace >= queue.length) {
       navigate("/result")
     }
-  }, [trace, queue.length, navigate])
+  }, [trace, navigate, checked])
+
+  useEffect(() => {
+    intervalId.current = setInterval(() => {
+      if (!showFeedback) {
+        setCountdown((prevCountdown) => prevCountdown - 1)
+      } else {
+        clearInterval(intervalId.current)
+        setCountdown(10)
+      }
+    }, 1000)
+
+    return () => {
+      clearInterval(intervalId.current)
+    }
+  }, [showFeedback])
 
   function moveNext() {
     setShowFeedback(true)
@@ -56,8 +76,8 @@ function QuizQuestionCard() {
 
   async function onSelect(i) {
     const selectedOption = i
-    await setChecked(selectedOption)
-    await dispatch(updateResultAction({ trace, selectedOption }))
+    setChecked(selectedOption)
+    dispatch(updateResultAction({ trace, selectedOption }))
 
     if (answers[trace] === selectedOption) {
       dispatch(addScore(100))
@@ -65,13 +85,17 @@ function QuizQuestionCard() {
     }
 
     setTimeout(() => {
-      // clearInterval(timeOutId)
       moveNext()
-    }, 2000)
+    }, 1000)
   }
 
   return (
     <div className="lg:px-10 pt-8 lg:pt-10 flex items-center justify-between">
+      {!showFeedback && (
+        <div className="absolute top-4 right-4 w-9 h-9 flex items-center justify-center text-lg outline outline-4 outline-green-700 font-bold rounded-full">
+          {countdown}
+        </div>
+      )}
       {!showFeedback ? (
         <div>
           <h2 className="text-md lg:text-2xl font-medium text-center px-14">

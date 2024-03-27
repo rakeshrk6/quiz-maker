@@ -68,7 +68,7 @@ function QuizInstructions() {
             <p>5. The result will be shown at the end of the quiz.</p>
           </div>
 
-          <form onClick={startQuiz} className=" text-center sm:mt-7">
+          <form onSubmit={startQuiz} className=" text-center sm:mt-7">
             <input
               className=" border-gray-500 border-2 rounded-md sm:text-sm text-xs sm:p-2 p-1"
               ref={inputRef}
