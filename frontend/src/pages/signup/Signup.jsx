@@ -6,7 +6,6 @@ import toast from "react-hot-toast"
 import { useAuth } from "../../contexts/AuthContext"
 
 function Signup() {
-  const [username, setUsername] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [invalidMessage, setMessage] = useState("")
@@ -25,7 +24,8 @@ function Signup() {
     try {
       setMessage("")
       setLoading(true)
-      await signup(email, password)
+      const res = await signup(email, password)
+      console.log("res", res)
       toast.success("You are Signed Up", {
         duration: 4000,
         style: {
@@ -36,10 +36,25 @@ function Signup() {
       })
       navigate("/profile")
     } catch (error) {
-      console.log(error)
-      setMessage("failed to sign up")
+      const userFriendlyMessage = getUserFriendlyErrorMessage(error)
+      console.log(userFriendlyMessage)
+      setMessage(userFriendlyMessage)
     }
     setLoading(false)
+  }
+
+  function getUserFriendlyErrorMessage(error) {
+    if (error && error.code) {
+      switch (error.code) {
+        case "auth/weak-password":
+          return "Password should be at least 6 characters"
+        case "auth/email-already-in-use":
+          return "This email is already in use."
+        default:
+          return "An unknown error occurred. Please try again."
+      }
+    }
+    return "An unknown error occurred"
   }
 
   return (
@@ -49,14 +64,6 @@ function Signup() {
         <p className=" text-center text-red-400">{invalidMessage}</p>
 
         <form onSubmit={handleSubmit}>
-          <label htmlFor="username">Username</label>
-          <input
-            type="text"
-            className="name bg-black bg-opacity-50"
-            id="username"
-            onChange={(e) => setUsername(e.target.value)}
-          />
-
           <label htmlFor="email">Email</label>
           <input
             type="email"

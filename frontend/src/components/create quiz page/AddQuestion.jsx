@@ -7,6 +7,7 @@ import toast from "react-hot-toast"
 import axios from "axios"
 import { useAuth } from "../../contexts/AuthContext"
 import useUserQuestions from "../../hooks/fetchUserQuestions"
+import Loading from "../Loading"
 
 const style = {
   position: "absolute",
@@ -28,48 +29,55 @@ function AddQuestion({ Open, close }) {
   const [answer, setAnswer] = useState("")
   const { currentUser } = useAuth()
   const { questions, fetchData } = useUserQuestions()
+  const [loading, setLoading] = useState(false)
 
   async function handleSubmit(event) {
     event.preventDefault()
-
-    if (
-      question.current.value === "" ||
-      option1.current.value === "" ||
-      option2.current.value === "" ||
-      answer === ""
-    ) {
-      toast.error("Please provide all details", {
-        style: {
-          padding: "10px",
-          background: "#333",
-          color: "#fff",
+    try {
+      setLoading(true)
+      if (
+        question.current.value === "" ||
+        option1.current.value === "" ||
+        option2.current.value === "" ||
+        answer === ""
+      ) {
+        toast.error("Please provide all details", {
+          style: {
+            padding: "10px",
+            background: "#333",
+            color: "#fff",
+          },
+        })
+        return
+      }
+      const formData = {
+        question: {
+          question: question.current.value,
+          options: [
+            option1.current.value,
+            option2.current.value,
+            option3.current.value,
+            option4.current.value,
+          ],
         },
-      })
-      return
+        answer: answer,
+      }
+
+      const res = await axios.post(
+        `${process.env.REACT_APP_SERVER_HOSTNAME}/api/question/${currentUser.uid}`,
+        formData
+      )
+
+      console.log(res)
+      // refresh updated questions
+      await fetchData()
+
+      close()
+    } catch (error) {
+      console.log(error)
+    } finally {
+      setLoading(false)
     }
-    const formData = {
-      question: {
-        question: question.current.value,
-        options: [
-          option1.current.value,
-          option2.current.value,
-          option3.current.value,
-          option4.current.value,
-        ],
-      },
-      answer: answer,
-    }
-
-    const res = await axios.post(
-      `${process.env.REACT_APP_SERVER_HOSTNAME}/api/question/${currentUser.uid}`,
-      formData
-    )
-
-    console.log(res)
-    // refresh updated questions
-    await fetchData()
-
-    close()
   }
 
   const handleCheck = (event) => {
@@ -176,7 +184,7 @@ function AddQuestion({ Open, close }) {
                 className="bg-[#3b82f6] sm:py-2 py-1 sm:px-9 px-5 rounded-md text-white"
                 type="submit"
               >
-                Add
+                {loading ? <Loading /> : "Add"}
               </button>
             </div>
           </form>

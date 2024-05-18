@@ -38,7 +38,11 @@ const Profile = () => {
         <div className="sm:w-[21rem] relative sm:fixed flex flex-col items-center gap-5 p-10 sm:h-[70%] mt-16 sm:m-10 outline outline-1 outline-slate-200 shadow-[0_3px_10px_rgb(0,0,0,0.2)] rounded-md">
           <img
             className="h-32 w-32 rounded-full outline outline-1"
-            src={currentUser.photoURL}
+            src={
+              currentUser.photoURL != null
+                ? currentUser.photoURL
+                : "https://t3.ftcdn.net/jpg/00/64/67/52/360_F_64675209_7ve2XQANuzuHjMZXP3aIYIpsDKEbF5dD.jpg"
+            }
             alt="user-img"
           />
           <h1 className=" text-xl font-medium">{currentUser.displayName}</h1>

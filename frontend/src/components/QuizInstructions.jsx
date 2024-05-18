@@ -31,6 +31,7 @@ function QuizInstructions() {
   function startQuiz() {
     if (inputRef.current?.value) {
       dispatch(setUserId(inputRef.current?.value))
+
       navigate("/quiz")
       dispatch(setOpen(false))
     }

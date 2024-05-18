@@ -11,6 +11,10 @@ function Navbar() {
     setLogoutOpen((prev) => !prev)
   }
 
+  useEffect(() => {
+    console.log(currentUser)
+  }, [])
+
   const location = useLocation()
   useEffect(() => {
     function handleClickOutside(event) {
@@ -101,7 +105,14 @@ function Navbar() {
                   onClick={handleLogoutDiv}
                   className="logout-div cursor-pointer h-10 w-10 rounded-full  overflow-hidden"
                 >
-                  <img src={currentUser.photoURL} alt="profile-pic" />
+                  <img
+                    src={
+                      currentUser.photoURL != null
+                        ? currentUser.photoURL
+                        : "https://t3.ftcdn.net/jpg/00/64/67/52/360_F_64675209_7ve2XQANuzuHjMZXP3aIYIpsDKEbF5dD.jpg"
+                    }
+                    alt="profile-pic"
+                  />
                 </div>
               </>
             )}
@@ -124,7 +135,14 @@ function Navbar() {
                   onClick={handleLogoutDiv}
                   className="logout-div cursor-pointer h-10 w-10 rounded-full  overflow-hidden"
                 >
-                  <img src={currentUser.photoURL} alt="profile-pic" />
+                  <img
+                    src={
+                      currentUser.photoURL != null
+                        ? currentUser.photoURL
+                        : "https://t3.ftcdn.net/jpg/00/64/67/52/360_F_64675209_7ve2XQANuzuHjMZXP3aIYIpsDKEbF5dD.jpg"
+                    }
+                    alt="profile-pic"
+                  />
                 </div>
               </>
             )}

@@ -7,6 +7,7 @@ import {
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithPopup,
+  signInWithRedirect,
   signOut,
 } from "firebase/auth"
 
@@ -37,7 +38,7 @@ export function AuthProvider({ children }) {
 
   function SigninWithGoogle() {
     const provider = new GoogleAuthProvider()
-    return signInWithPopup(auth, provider)
+    return signInWithRedirect(auth, provider)
   }
 
   useEffect(() => {

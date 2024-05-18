@@ -120,7 +120,7 @@ function QuizQuestionCard() {
         </div>
       ) : (
         <div
-          className={`mb-20 rounded-2xl text-center sm:px-32 px-20 py-14 shadow-[0_3px_10px_rgb(0,0,0,0.2)] ${
+          className={`md:mb-20 sm:mb-10 rounded-2xl text-center md:px-32 px-20 md:py-14 py-8 shadow-[0_3px_10px_rgb(0,0,0,0.2)] ${
             feedback === "Correct" ? "bg-green-200" : "bg-red-200"
           }`}
         >

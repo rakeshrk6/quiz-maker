@@ -34,7 +34,7 @@ function Result() {
 
   return (
     <div className="flex py-12 pb-60 sm:pt-5 sm:items-center justify-center bg-gradient-to-r from-indigo-500 to-green-200 ">
-      <div className=" w-[80vw]  sm:h-[78vh] sm:w-[36%] rounded-xl bg-black bg-opacity-60 mt-[5rem]">
+      <div className=" w-[80vw]  sm:h-[80vh] sm:w-[36%] rounded-xl bg-black bg-opacity-60 mt-[5rem]">
         <div className=" p-7 flex flex-col gap-5 text-sm">
           <div className="text-[#dbdbdb] text-center text-lg -mt-2">Result</div>
           <div className="  bg-[#151515] flex items-center text-white rounded-xl">
