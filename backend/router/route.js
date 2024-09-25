@@ -14,6 +14,7 @@ const {
   dropResult,
   getQuestions,
   getUserQuizes,
+  insertQuizByGemini,
 } = require("../controllers/controller")
 const { gemini } = require("../controllers/gemini")
 
@@ -36,6 +37,7 @@ router
 router.route("/deleteAll/:userId").delete(deleteAllQuestions)
 // fetch or create quizes for home page
 router.route("/quiz/:userId").post(insertQuiz)
+router.route("/quiz/gemini/:userId").post(insertQuizByGemini)
 router.route("/").get(getQuizs)
 
 // result routes API

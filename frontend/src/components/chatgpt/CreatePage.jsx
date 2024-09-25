@@ -1,12 +1,13 @@
 import { Box, InputLabel, MenuItem, Modal, TextField } from "@mui/material"
 import Select from "@mui/material/Select"
 import React, { useRef, useState } from "react"
-import { axiosClient } from "../../utils/axiosClient"
 import axios from "axios"
 import { useDispatch } from "react-redux"
 import { startExamAction } from "../../redux/slices/QuestionReducer"
 import { updateLength } from "../../redux/slices/ResultReducer"
 import { useNavigate } from "react-router-dom"
+import { useAuth } from "../../contexts/AuthContext"
+import toast from "react-hot-toast"
 
 const style = {
   position: "absolute",
@@ -22,10 +23,12 @@ function CreatePage({ Open, close }) {
   const [level, setLevel] = useState("")
   const [isLoading, setLoading] = useState(false)
   const [isGotOutput, setGotOutput] = useState(false)
+  const [quizOutput, setQuizOutput] = useState()
   const topic_name = useRef("")
   const question_count = useRef("")
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const { currentUser } = useAuth()
 
   const handleChange = (event) => {
     setLevel(event.target.value)
@@ -46,6 +49,7 @@ function CreatePage({ Open, close }) {
           `${process.env.REACT_APP_SERVER_HOSTNAME}/gemini/ai`,
           inputData
         )
+        setQuizOutput(output.data)
         const { quiz_name, questions, answers } = output.data
 
         if (questions.length > 0) {
@@ -68,6 +72,28 @@ function CreatePage({ Open, close }) {
     close()
     navigate("/quiz")
   }
+
+  async function addQuiz() {
+    const res = await axios.post(
+      `${process.env.REACT_APP_SERVER_HOSTNAME}/api/quiz/gemini/${currentUser.uid}`,
+      quizOutput
+    )
+
+    if (res.data.statusCode !== 200) {
+      console.log("quiz not saved")
+      return
+    }
+
+    toast.success("Quiz added", {
+      duration: 4000,
+      style: {
+        padding: "10px",
+        background: "#333",
+        color: "#fff",
+      },
+    })
+  }
+
   return (
     <div className={`flex justify-center items-center bg-white z-50`}>
       <Modal
@@ -94,9 +120,9 @@ function CreatePage({ Open, close }) {
               </h1>
             </div>
           ) : isGotOutput ? (
-            <div className="sm:w-[50vh] flex flex-col justify-center items-center py-20  ">
+            <div className="sm:w-[50vh] flex flex-col justify-center items-center py-10  ">
               <h1 className="text-3xl text-center font-medium pb-3">
-                Hurray! Your Quiz Generated
+                Hurray! Your Quiz is Generated
               </h1>
               <div className=" text-green-700 text-5xl ">
                 <i className="uis uis-check-circle"></i>
@@ -104,9 +130,15 @@ function CreatePage({ Open, close }) {
 
               <button
                 onClick={startQuiz}
+                className=" bg-green-600 rounded-md p-3 px-5  text-sm mx-auto text-white font-medium mt-10"
+              >
+                Attempt Quiz
+              </button>
+              <button
+                onClick={addQuiz}
                 className=" bg-amber-400 rounded-md p-3 px-5  text-sm mx-auto text-white font-medium mt-10"
               >
-                Start Quiz
+                Add Quiz
               </button>
             </div>
           ) : (

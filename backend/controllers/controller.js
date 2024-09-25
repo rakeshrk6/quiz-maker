@@ -36,6 +36,23 @@ async function insertQuiz(req, res) {
     res.json(error(400, e.message))
   }
 }
+async function insertQuizByGemini(req, res) {
+  try {
+    const { quiz_name, questions, answers } = req.body
+    const userId = req.params.userId
+
+    const respond = await Quizs.insertMany({
+      name: quiz_name,
+      questions: questions,
+      answers: answers,
+      userId,
+    })
+    res.json(success(200, respond))
+    console.log("data saved successfully")
+  } catch (e) {
+    res.json(error(400, e.message))
+  }
+}
 
 // delete a quiz
 async function dropQuiz(req, res) {
@@ -127,4 +144,5 @@ module.exports = {
   dropResult,
   getQuestions,
   getUserQuizes,
+  insertQuizByGemini,
 }

@@ -26,7 +26,7 @@ function Openai() {
           onClick={toggleComponent}
           className="sm:p-4 p-2 sm:text-md text-sm sm:px-10 px-5 rounded-full hover:bg-blue-600 text-white bg-[#0071f2] sm:mt-12 mt-9 "
         >
-          Take Quiz by AI
+          Create Quiz by AI
         </button>
       </div>
       {isOpen && <CreatePage Open={isOpen} close={toggleComponent} />}
