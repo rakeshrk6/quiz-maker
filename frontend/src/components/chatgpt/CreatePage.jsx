@@ -43,7 +43,7 @@ function CreatePage({ Open, close }) {
     ;(async () => {
       try {
         const output = await axios.post(
-          `${process.env.REACT_APP_SERVER_HOSTNAME}/chatgpt/ai`,
+          `${process.env.REACT_APP_SERVER_HOSTNAME}/gemini/ai`,
           inputData
         )
         const { quiz_name, questions, answers } = output.data

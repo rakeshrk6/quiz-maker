@@ -31,7 +31,9 @@ app.use("/api", router) //apis
 app.use("/get-quizes", router)
 // app.use("/auth", authRouter)
 // chatgpt api
-app.use("/chatgpt", router)
+
+// app.use("/chatgpt", router)  gpt free trial is expired
+app.use("/gemini", router)
 
 app.get("/", (req, res) => {
   try {

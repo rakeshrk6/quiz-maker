@@ -15,6 +15,7 @@ const {
   getQuestions,
   getUserQuizes,
 } = require("../controllers/controller")
+const { gemini } = require("../controllers/gemini")
 
 const { chatgpt } = require("../controllers/openai")
 
@@ -41,6 +42,9 @@ router.route("/").get(getQuizs)
 router.route("/result").get(getResult).post(postResult).delete(dropResult)
 
 // chatgpt api
-router.route("/ai").post(chatgpt)
+// router.route("/ai").post(chatgpt)
+
+//gemini api
+router.route("/ai").post(gemini)
 
 module.exports = router
