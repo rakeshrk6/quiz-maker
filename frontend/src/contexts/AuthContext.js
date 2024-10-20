@@ -38,7 +38,9 @@ export function AuthProvider({ children }) {
 
   function SigninWithGoogle() {
     const provider = new GoogleAuthProvider()
-    return signInWithRedirect(auth, provider)
+    // return signInWithRedirect(auth, provider)
+
+    return signInWithPopup(auth, provider)
   }
 
   useEffect(() => {
