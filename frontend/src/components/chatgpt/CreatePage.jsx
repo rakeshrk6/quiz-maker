@@ -49,8 +49,11 @@ function CreatePage({ Open, close }) {
           `${process.env.REACT_APP_SERVER_HOSTNAME}/gemini/ai`,
           inputData
         )
-        setQuizOutput(output.data)
-        const { quiz_name, questions, answers } = output.data
+        const data = output.data;
+        console.log(data);
+        
+        setQuizOutput(data)
+        const { quiz_name, questions, answers } = data
 
         if (questions.length > 0) {
           dispatch(startExamAction({ questions, answers }))

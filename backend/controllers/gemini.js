@@ -9,10 +9,22 @@ async function gemini(req, res) {
   const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" })
 
   const result = await model.generateContent(prompt)
-  const quiz = result.response.text()
 
-  //   console.log(quiz)
-  res.send(quiz)
+    
+  const responseText = result.response.text();
+  const cleanedText = responseText.replace(/^[^{}]*|[^{}]*$/g, ""); 
+  let quiz;
+  try {
+    quiz = JSON.parse(cleanedText);
+  } catch (error) {
+    console.error("Error parsing JSON:", error.message);
+    return res.status(400).json({
+      success: false,
+      message: "Failed to parse quiz JSON. The response might be invalid.",
+    });
+  }
+    console.log(quiz)
+    res.status(200).json(quiz);
 }
 
 module.exports = { gemini }
